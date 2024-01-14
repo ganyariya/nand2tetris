@@ -11,5 +11,16 @@ CHIP Mux {
     OUT out;
 
     PARTS:
-    //// Replace this comment with your code.
+    // ここでは And, Or, Not を使っている
+    // And, Or, Not はすでに NAND で構成されているため、 その気になれば Nand に置き換えられる
+    // Not(in=sel, out=nsel);
+    // And(a=a, b=nsel, out=p1);
+    // And(a=b, b=sel, out=p2);
+    // Or(a=p1, b=p2, out=out);
+
+    // NAND Only
+    Nand(a=sel, b=sel, out=nsel);
+    Nand(a=a, b=nsel, out=p1);
+    Nand(a=b, b=sel, out=p2);
+    Nand(a=p1, b=p2, out=out);
 }
