@@ -9,10 +9,19 @@
  *                            ...
  *                            [0, 0, 0, 0, 0, 0, 0, in] if sel == 111
  */
+
 CHIP DMux8Way {
     IN in, sel[3];
     OUT a, b, c, d, e, f, g, h;
 
     PARTS:
-    //// Replace this comment with your code.
+    DMux(in=in, sel=sel[2], a=c1, b=c2);
+
+    DMux(in=c1, sel=sel[1], a=k1, b=k2);
+    DMux(in=c2, sel=sel[1], a=k3, b=k4);
+
+    DMux(in=k1, sel=sel[0], a=a, b=b);
+    DMux(in=k2, sel=sel[0], a=c, b=d);
+    DMux(in=k3, sel=sel[0], a=e, b=f);
+    DMux(in=k4, sel=sel[0], a=g, b=h);
 }
