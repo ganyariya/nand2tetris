@@ -11,5 +11,29 @@ CHIP Xor {
     OUT out;
 
     PARTS:
-    //// Replace this comment with your code.
+    // 正準表現 Nand 書き下しの冗長を省いたもの
+    Nand(a=a, b=a, out=na);
+    Nand(a=b, b=b, out=nb);
+
+    Nand(a=a, b=nb, out=p1);
+    Nand(a=b, b=na, out=p2);
+    Nand(a=p1, b=p2, out=out);
+
+    // 愚直に Not, And, Or 正準表現を Nand で書き下したもの
+    // Nand(a=a, b=a, out=na);
+    // Nand(a=b, b=b, out=nb);
+    // Nand(a=a, b=nb, out=p1);
+    // Nand(a=p1, b=p1, out=pn1);
+    // Nand(a=b, b=na, out=p2);
+    // Nand(a=p2, b=p2, out=pn2);
+    // Nand(a=pn1, b=pn1, out=pnn1);
+    // Nand(a=pn2, b=pn2, out=pnn2);
+    // Nand(a=pnn1, b=pnn2, out=out);
+
+    // 正準表現
+    // Not(in=a, out=na);
+    // Not(in=b, out=nb);
+    // And(a=a, b=nb, out=p1);
+    // And(a=b, b=na, out=p2);
+    // Or(a=p1, b=p2, out=out);
 }
