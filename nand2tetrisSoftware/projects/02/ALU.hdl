@@ -41,5 +41,28 @@ CHIP ALU {
         ng;      // if (out < 0)  equals 1, else 0
 
     PARTS:
-    //// Replace this comment with your code.
+    // zx -> nx
+    Mux16(a=x, b=false, sel=zx, out=x1);
+    Not16(in=x1, out=nx1);
+    Mux16(a=x1, b=nx1, sel=nx, out=xout);
+
+    // zy -> ny
+    Mux16(a=y, b=false, sel=zy, out=y1);
+    Not16(in=y1, out=ny1);
+    Mux16(a=y1, b=ny1, sel=ny, out=yout);
+
+    // 加算とAND を実行して f で選択する
+    And16(a=xout, b=yout, out=anded16);
+    Add16(a=xout, b=yout, out=added16);
+    Mux16(a=anded16, b=added16, sel=f, out=fout);
+
+    // 出力を反転させて no Multiplexer で選択する
+    Not16(in=fout, out=nfout);
+    Mux16(a=fout, b=nfout, sel=no, out=out, out[0..7]=outlow, out[8..15]=outhigh, out[15]=ng);
+
+    // zr の計算
+    Or8Way(in=outlow, out=low);
+    Or8Way(in=outhigh, out=high);
+    Or(a=low, b=high, out=k);
+    Not(in=k, out=zr);
 }
