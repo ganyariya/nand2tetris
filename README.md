@@ -21,9 +21,14 @@ Nand2Tetris シミュレータの実行ファイルが入っています。
 
 ## nand2tetrisSoftware/projects/xx
 
-対応する章に関する ganyariay が実装したソースコードが入っています。
+対応する章に関する ganyariya が実装したソースコードが入っています。
 
 # Chapter Commits
 
 - 01 ブール論理
   - https://github.com/ganyariya/nand2tetris/tree/ceba0eebf067ca971d4cbc35ceca77c0edd8aa8e/nand2tetrisSoftware/projects/01
+- 02 ブール算術
+  - https://github.com/ganyariya/nand2tetris/tree/502b6b406b59ddcdfb8e044f2c91654451d18d5b
+- 03 順序回路
+  - https://github.com/ganyariya/nand2tetris/tree/cc881aa1c57efee4e9b4615eb80b3b0772a65d6a
+
