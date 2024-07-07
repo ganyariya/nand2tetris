@@ -10,6 +10,13 @@
 ./nand2tetrisSoftware/tools/HardwareSimulator.sh
 ```
 
+#### Online での実行
+
+Online で実行できる環境が用意されている
+そのためこちらを利用しても問題ない
+
+https://nand2tetris.github.io/web-ide/cpu
+
 # ディレクトリ構成
 
 ## nand2tetrisSoftware/tools
