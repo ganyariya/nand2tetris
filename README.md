@@ -40,4 +40,6 @@ Nand2Tetris シミュレータの実行ファイルが入っています。
   - https://github.com/ganyariya/nand2tetris/tree/cc881aa1c57efee4e9b4615eb80b3b0772a65d6a
 - 04 機械語
   - https://github.com/ganyariya/nand2tetris/tree/268c183fcaf5a9abb452d7a84b272713f3245802
+- 05 コンピュータ・アーキテクチャ
+  - https://github.com/ganyariya/nand2tetris/blob/37037ef96bb0a46d5ce0b4d79b4e3fa8b568bbfd
 
