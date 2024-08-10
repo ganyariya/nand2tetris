@@ -19,5 +19,26 @@ CHIP Memory {
     OUT out[16];
 
     PARTS:
-    //// Replace this comment with your code.
+    /**
+     * 15 bit からなるアドレス
+     * ??1111111111111
+     * - 0 ~ 16383 の場合: (01)1 1111 1111 1111
+     * - 16384 ~ 24575 の場合: (10)1 1111 1111 1111
+     *   - 下 13 桁で「SCREEN 内の絶対アドレス」を指定している
+     *   - (10) を上位につけることで、 `Memory` 内での相対アドレスにしている
+     * 24576 の場合: (11)0 0000 0000 0000
+     */
+    // Dmux4Way で `load` の値を、選択された MemoryMap IO にだけ渡す
+    DMux4Way(in=load, sel=address[13..14], a=l1, b=l2, c=l3, d=l4);
+
+    // l1, l2 (00 or 01) の場合は RAM を選択している
+    Or(a=l1, b=l2, out=loadram);
+    RAM16K(in=in, load=loadram, address=address[0..13], out=outram);
+
+    // Screen 内の絶対アドレスは `[0..12]` で指定している
+    // 上位 2 桁 `(10)` を上位につけることで、 Memory 内の相対アドレスにしている
+    Screen(in=in, load=l3, address=address[0..12], out=outscreen);
+    Keyboard(out=outkeyboard);
+
+    Mux4Way16(a=outram, b=outram, c=outscreen, d=outkeyboard, sel=address[13..14], out=out);
 }
