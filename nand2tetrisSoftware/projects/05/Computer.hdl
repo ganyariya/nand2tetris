@@ -17,5 +17,28 @@ CHIP Computer {
     IN reset;
 
     PARTS:
-    //// Replace this comment with your code.
+        /*
+         * Computer は 
+         * - ROM(命令アドレス)
+         * - RAM(データメモリ + I/Oメモリマップ)
+         * - CPU
+         * があれば自動で「ROM から命令データを CPU.pc をもとに取り出し」、CPU で処理した内容を RAM に保存する
+         */
+
+        // ROM はプログラムカウンタの値をもとに、該当アドレスの命令データを取り出す
+        // 命令データも 2^16 のビットで表される
+        // CPU で命令データは処理されるため、該当の CPU のプロトコルに沿ったバイナリデータにする必要がある
+        ROM32K(address=pcOut, out=instruction);
+
+        // 読み込んだメモリと命令データをもとに、 ALU で計算処理を行う
+        // 次に読み出したい命令アドレスはプログラムカウンタに入っており ROM32K に流す
+        // 次に読み出したいメモリアドレスは、 Memory に流す
+        CPU(inM=memoryOut, instruction=instruction, reset=reset, outM=outM, writeM=writeM, addressM=addressM, pc=pcOut);
+
+        /*
+        * in = 書き込みたい値
+        * load = 書き込み（記録）を行うか？
+        * address = 書き込む場所
+        */
+        Memory(in=outM, load=writeM, address=addressM, out=memoryOut);
 }
